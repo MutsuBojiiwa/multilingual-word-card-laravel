@@ -2,15 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // テスト
-    public function getJson(){
-        return response()->json(['name' => 'john']);
+    /**
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return response()->json(Auth::user());
+        }
+        return response()->json([], 401);
+    }
+
+    /**
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->json(true);
+    }
+
+    public function health() {
+        return 'OKです！！';
     }
 }
-

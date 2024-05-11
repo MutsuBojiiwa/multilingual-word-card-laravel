@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('login', [LoginController::class, 'getJson']);
-
-Route::get('users', function () {
+Route::middleware('auth:sanctum')->get('users', function () {
     return User::all();
 });
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout']);
+Route::get('health', [LoginController::class, 'health']);
+
