@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -14,16 +15,25 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        Log::info("ログインの中");
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            Log::info("Authの中");
 
-            return response()->json(Auth::user());
+            $request->session()->regenerate();
+            Log::info("セッションがリフレッシュされました。");
+
+            $user = Auth::user();
+            Log::info("ログインしたユーザー: " . $user);
+
+            return response()->json($user);
         }
+
         return response()->json([], 401);
     }
 
@@ -42,7 +52,8 @@ class LoginController extends Controller
         return response()->json(true);
     }
 
-    public function health() {
+    public function health()
+    {
         return 'OKです！！';
     }
 }

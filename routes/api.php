@@ -4,6 +4,8 @@ use App\Http\Controllers\LoginController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,19 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware('auth:sanctum')->get('users', function () {
-    return User::all();
+    if (Auth::check()) {
+        Log::info("ミドルウェアの中");
+        return User::all();
+    } else {
+        // 認証されていない場合の処理
+        Log::info("認証されていないミドルウェアの中");
+        return response()->json(['error' => 'Unauthenticated.'], 401);
+    }
 });
+
+// Route::get('users', function () {
+//     return User::all();
+// });
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
 Route::get('health', [LoginController::class, 'health']);
