@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 
 use App\Models\User;
@@ -39,3 +38,4 @@ Route::middleware('auth:api')->get('users', function () {
     return User::all();
 });
 
+// Route::get('health', [LoginController::class, 'getJson']);
