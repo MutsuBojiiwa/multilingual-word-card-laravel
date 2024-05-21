@@ -8,6 +8,7 @@ class HealthCheckController extends Controller
 {
     public function health()
     {
-        return response()->json(['status' => 'ok'], 200);
+        date_default_timezone_set('Asia/Tokyo');
+        return response()->json(['status' => 'OK','now' => date("Y-m-d H:i:s")], 200);
     }
 }
