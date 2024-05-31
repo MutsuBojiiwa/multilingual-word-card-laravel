@@ -16,13 +16,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        Log::info("ログインメソッドの中");
+        Log::info('$request=' . json_encode($request));
+
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
+
         $credentials = $request->only('email', 'password');
         $token = Auth::attempt($credentials);
-        // Log::info($token);
+
+        Log::info('$credentials=' . $credentials);
+        Log::info('$token=' . $token);
 
         if (!$token) {
             return response()->json([
@@ -31,6 +37,9 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+
+        Log::info('$user=' . json_encode($user));
+
         return response()->json([
             'user' => $user,
             'authorization' => [
