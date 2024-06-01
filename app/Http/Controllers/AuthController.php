@@ -25,29 +25,28 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        $token = Auth::attempt($credentials);
-
-        Log::info('$credentials=' .json_encode($credentials));
-        Log::info('$token=' . $token);
-
-        if (!$token) {
+        if (!$token = Auth::attempt($credentials)) {
             return response()->json([
                 'message' => '認証に失敗しました。',
             ], 401);
         }
 
         $user = Auth::user();
-
+        Log::info('$credentials=' . json_encode($credentials));
+        Log::info('$token=' . $token);
         Log::info('$user=' . json_encode($user));
 
         return response()->json([
-            'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
+            'data' => [
+                'user' => $user,
+                'authorization' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
             ]
         ]);
     }
+
 
     public function register(Request $request)
     {
@@ -66,8 +65,10 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'ユーザーの作成に成功しました!',
-            'user' => $user
+            'data' => [
+                'message' => 'ユーザーの作成に成功しました!',
+                'user' => $user
+            ]
         ]);
     }
 
@@ -75,7 +76,9 @@ class AuthController extends Controller
     {
         Auth::logout();
         return response()->json([
-            'message' => 'ログアウトしました。',
+            'data' => [
+                'message' => 'ログアウトしました。',
+            ]
         ]);
     }
 
