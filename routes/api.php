@@ -39,3 +39,8 @@ Route::get('/check-jwt-secret', function () {
     return response()->json(['jwt_secret' => env('JWT_SECRET')]);
 });
 
+Route::get('/check-environment', function () {
+    return response()->json([
+        'environment' => $_ENV,
+    ]);
+});
