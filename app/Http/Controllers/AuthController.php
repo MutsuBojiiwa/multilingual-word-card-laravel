@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -17,7 +17,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         Log::info("ログインメソッドの中");
-        Log::info('$request=' . json_encode($request));
+        Log::info('$request=' . json_encode($request->all()));
 
         $request->validate([
             'email' => 'required|string|email',
@@ -25,13 +25,13 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (!$token = Auth::attempt($credentials)) {
+        if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json([
                 'message' => '認証に失敗しました。',
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = JWTAuth::user();
         Log::info('$credentials=' . json_encode($credentials));
         Log::info('$token=' . $token);
         Log::info('$user=' . json_encode($user));
@@ -46,7 +46,6 @@ class AuthController extends Controller
             ]
         ]);
     }
-
 
     public function register(Request $request)
     {
@@ -74,7 +73,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        JWTAuth::invalidate(JWTAuth::getToken());
         return response()->json([
             'data' => [
                 'message' => 'ログアウトしました。',
@@ -85,9 +84,9 @@ class AuthController extends Controller
     public function refresh()
     {
         return response()->json([
-            'user' => Auth::user(),
+            'user' => JWTAuth::user(),
             'authorization' => [
-                'token' => Auth::refresh(),
+                'token' => JWTAuth::refresh(),
                 'type' => 'bearer',
             ]
         ]);

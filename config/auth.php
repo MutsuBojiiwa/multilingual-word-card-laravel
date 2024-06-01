@@ -38,8 +38,7 @@ return [
 
     'guards' => [
         'web' => [
-            // 'driver' => 'session',  //元の記載
-            'driver' => 'jwt',  //変更
+            'driver' => 'session',  //元の記載
             'provider' => 'users',
         ],
         //追加
