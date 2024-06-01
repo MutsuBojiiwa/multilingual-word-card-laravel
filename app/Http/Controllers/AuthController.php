@@ -27,7 +27,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $token = Auth::attempt($credentials);
 
-        Log::info('$credentials=' . $credentials);
+        Log::info('$credentials=' .json_encode($credentials));
         Log::info('$token=' . $token);
 
         if (!$token) {
