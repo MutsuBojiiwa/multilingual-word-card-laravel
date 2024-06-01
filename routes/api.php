@@ -27,11 +27,15 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-Route::get('users', function () {
+Route::middleware('auth:api')->get('users', function () {
     $users = User::all();
     return response()->json([
         'data' => $users
     ]);
 
+});
+
+Route::get('/check-jwt-secret', function () {
+    return response()->json(['jwt_secret' => env('JWT_SECRET')]);
 });
 
