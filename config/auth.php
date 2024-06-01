@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        // 'guard' => 'web',   //元の記載
-        'guard' => 'api',   //変更
+        'guard' => 'web',   //元の記載
+        // 'guard' => 'api',   //変更
         'passwords' => 'users',
     ],
 
