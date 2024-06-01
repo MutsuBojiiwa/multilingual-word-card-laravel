@@ -27,7 +27,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-Route::middleware('auth:api')->get('users', function () {
-    return User::all();
+Route::get('users', function () {
+    $users = User::all();
+    return response()->json([
+        'data' => $users
+    ]);
+
 });
 
