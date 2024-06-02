@@ -27,20 +27,20 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-Route::middleware('auth:api')->get('users', function () {
-    $users = User::all();
-    return response()->json([
-        'data' => $users
-    ]);
+// Route::middleware('auth:api')->get('users', function () {
+//     $users = User::all();
+//     return response()->json([
+//         'data' => $users
+//     ]);
 
-});
+// });
 
-Route::get('/check-jwt-secret', function () {
-    return response()->json(['jwt_secret' => env('JWT_SECRET')]);
-});
+// Route::get('/check-jwt-secret', function () {
+//     return response()->json(['jwt_secret' => env('JWT_SECRET')]);
+// });
 
-Route::get('/check-environment', function () {
-    return response()->json([
-        'environment' => $_ENV,
-    ]);
-});
+// Route::get('/check-environment', function () {
+//     return response()->json([
+//         'environment' => $_ENV,
+//     ]);
+// });
