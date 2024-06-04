@@ -14,7 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'web',   //元の記載
+        // 'guard' => 'api',   //変更
         'passwords' => 'users',
     ],
 
@@ -37,7 +38,12 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver' => 'session',  //元の記載
+            'provider' => 'users',
+        ],
+        //追加
+        'api' => [
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
