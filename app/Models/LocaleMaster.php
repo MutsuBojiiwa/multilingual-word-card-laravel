@@ -9,6 +9,8 @@ class LocaleMaster extends Model
 {
     use HasFactory;
 
+    protected $table = 'locale_master';
+
     protected $fillable = [
         'key'
     ];
