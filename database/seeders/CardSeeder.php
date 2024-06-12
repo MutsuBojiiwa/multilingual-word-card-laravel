@@ -14,7 +14,7 @@ class CardSeeder extends Seeder
      */
     public function run()
     {
-        $deckIds = [1, 1, 1, 1, 1, 1, 1, 1];
+        $deckIds = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2];
 
         foreach ($deckIds as $deckId) {
             Card::create([
