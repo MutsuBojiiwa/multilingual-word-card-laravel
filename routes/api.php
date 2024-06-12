@@ -22,14 +22,28 @@ use App\Http\Controllers\DeckController;
 
 Route::get('/health', [HealthCheckController::class, 'health']);
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
 });
 
-Route::apiResource('decks', DeckController::class);
+
+Route::group(['prefix' => 'decks'], function () {
+    Route::get('index', [DeckController::class, 'index']);
+    Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
+});
+
+
+
+// Route::controller(DeckController::class)->group(function () {
+//     Route::get('/decks', 'index');
+//     Route::get('/decks/{userId}', 'getDecksByUserId');
+// });
+
+
+// Route::apiResource('decks', DeckController::class);
 
 
 // Route::middleware('auth:api')->get('users', function () {
