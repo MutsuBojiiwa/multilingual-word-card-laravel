@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\CardController;
 
 
 /*
@@ -33,6 +34,11 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'decks'], function () {
     Route::get('index', [DeckController::class, 'index']);
     Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
+});
+
+Route::group(['prefix' => 'cards'], function () {
+    Route::get('index', [CardController::class, 'index']);
+    Route::get('{userId}', [CardController::class, 'getCardsByDeckId']);
 });
 
 
