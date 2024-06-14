@@ -38,7 +38,7 @@ Route::group(['prefix' => 'decks'], function () {
 
 Route::group(['prefix' => 'cards'], function () {
     Route::get('index', [CardController::class, 'index']);
-    Route::get('{userId}', [CardController::class, 'getCardsByDeckId']);
+    Route::get('{userId}', [CardController::class, 'getCardDetailsByDeckId']);
 });
 
 

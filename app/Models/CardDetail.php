@@ -9,6 +9,8 @@ class CardDetail extends Model
 {
     use HasFactory;
 
+    protected $table = 'card_details';
+
     protected $fillable = [
         'card_id', 'locale_id', 'word'
     ];
