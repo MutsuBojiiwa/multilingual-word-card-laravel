@@ -31,15 +31,15 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 
-// Route::group(['prefix' => 'decks'], function () {
-//     // Route::get('getAll', [DeckController::class, 'getAll']);
-//     Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
-// });
+Route::group(['prefix' => 'decks'], function () {
+    // Route::get('getAll', [DeckController::class, 'getAll']);
+    Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
+});
 
-// Route::group(['prefix' => 'cards'], function () {
-//     // Route::get('getAll', [CardController::class, 'getAll']);
-//     Route::get('{userId}', [CardController::class, 'getCardDetailsByDeckId']);
-// });
+Route::group(['prefix' => 'cards'], function () {
+    // Route::get('getAll', [CardController::class, 'getAll']);
+    Route::get('{userId}', [CardController::class, 'getCardDetailsByDeckId']);
+});
 
 
 
