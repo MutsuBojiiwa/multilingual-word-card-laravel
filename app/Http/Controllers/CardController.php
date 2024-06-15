@@ -10,15 +10,16 @@ use App\Models\CardDetail;
 
 class CardController extends Controller
 {
-    public function index()
+    public function getAll()
     {
-        Log::info('index method called');
         $allCards = Card::all();
         return response()->json(['data' => $allCards], 200);
     }
 
     public function getCardDetailsByDeckId($deckId)
     {
+        // Log::info('method called');
+
         $cards = Card::where('deck_id', $deckId)->with('details')->get();
         $allCardDetails = [];
 
