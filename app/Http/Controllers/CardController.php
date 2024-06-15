@@ -18,15 +18,7 @@ class CardController extends Controller
 
     public function getCardDetailsByDeckId($deckId)
     {
-        // Log::info('method called');
-
         $cards = Card::where('deck_id', $deckId)->with('details')->get();
-        $allCardDetails = [];
-
-        foreach ($cards as $card) {
-            $allCardDetails = array_merge($allCardDetails, $card->details->toArray());
-        }
-
-        return response()->json(['data' => $allCardDetails], 200);
+        return response()->json(['data' => $cards], 200);
     }
 }
