@@ -6,6 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DeckController;
+use App\Http\Controllers\CardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +23,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/health', [HealthCheckController::class, 'health']);
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
 });
+
+
+// Route::group(['prefix' => 'decks'], function () {
+//     // Route::get('getAll', [DeckController::class, 'getAll']);
+//     Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
+// });
+
+// Route::group(['prefix' => 'cards'], function () {
+//     // Route::get('getAll', [CardController::class, 'getAll']);
+//     Route::get('{userId}', [CardController::class, 'getCardDetailsByDeckId']);
+// });
+
+
+
+// Route::controller(DeckController::class)->group(function () {
+//     Route::get('/decks', 'index');
+//     Route::get('/decks/{userId}', 'getDecksByUserId');
+// });
+
+
+// Route::apiResource('decks', DeckController::class);
+
 
 // Route::middleware('auth:api')->get('users', function () {
 //     $users = User::all();
