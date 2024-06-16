@@ -25,9 +25,19 @@ class CardController extends Controller
 
         $locales = LocaleMaster::whereIn('id', $usedLocaleIds)->get();
 
+
+        $formattedLocales = $locales->map(function ($locale) {
+            $localeNames = ['ja' => "日本語", "en" => "English", "fr" => "Français"];
+            return [
+                'id' => $locale->id,
+                'key' => $locale->key,
+                'name' => $localeNames[$locale->key] ?? 'undefined'
+            ];
+        });
+
         return response()->json([
             'data' => [
-                'locales' => $locales,
+                'locales' => $formattedLocales,
                 'cards' => $cards,
             ],
         ], 200);
