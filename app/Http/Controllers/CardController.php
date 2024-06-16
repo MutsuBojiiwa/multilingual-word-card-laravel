@@ -11,6 +11,11 @@ use App\Models\LocaleMaster;
 
 class CardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+    
     public function getAll()
     {
         $allCards = Card::all();

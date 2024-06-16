@@ -33,6 +33,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'decks'], function () {
     // Route::get('getAll', [DeckController::class, 'getAll']);
+    Route::put('update/{id}', [DeckController::class, 'update']);
     Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
 });
 
