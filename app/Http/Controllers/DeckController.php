@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Deck;
 use Illuminate\Support\Facades\Log;
+
+use App\Models\Deck;
+use App\Http\Requests\UpdateDeckRequest;
+
 
 class DeckController extends Controller
 {
@@ -45,14 +47,9 @@ class DeckController extends Controller
     //     return response()->json(['data' => $deck], 200);
     // }
 
-    public function update(Request $request, $id)
+    public function update(UpdateDeckRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'userId' => 'required|integer',
-            'name' => 'required|string',
-            'isFavorite' => 'required|boolean',
-            'isPublic' => 'required|boolean',
-        ]);
+        $validatedData = $request->validated();
 
         $deck = Deck::findOrFail($id);
         $deck->user_id = $validatedData['userId'];
