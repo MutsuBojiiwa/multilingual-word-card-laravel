@@ -15,7 +15,7 @@ class CardController extends Controller
     {
         $this->middleware('auth:api');
     }
-    
+
     public function getAll()
     {
         $allCards = Card::all();
@@ -46,5 +46,31 @@ class CardController extends Controller
                 'cards' => $cards,
             ],
         ], 200);
+    }
+
+    public function store(Request $request)
+    {
+        // 新規のカードを作る
+        $card = Card::create([
+            'deck_id' => $request->deck_id
+        ]);
+
+        // さっき作ったカードIDでカード詳細を作る
+        $cardDetails = [];
+        foreach ($request->details as $detail) {
+            $cardDetails[] = new CardDetail([
+                'card_id' => $card->id,
+                'locale_id' => $detail['locale_id'],
+                'word' => $detail['word'],
+            ]);
+        }
+        $card->details()->saveMany($cardDetails);
+
+        return response()->json([
+            'data' => [
+                'card' => $card,
+                'cardDetails' => $cardDetails
+            ]
+        ], 201);
     }
 }
