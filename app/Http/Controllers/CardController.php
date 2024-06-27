@@ -50,6 +50,8 @@ class CardController extends Controller
 
     public function store(Request $request)
     {
+        Log::debug($request);
+
         // 新規のカードを作る
         $card = Card::create([
             'deck_id' => $request->deck_id
@@ -72,5 +74,11 @@ class CardController extends Controller
                 'cardDetails' => $cardDetails
             ]
         ], 201);
+    }
+
+    public function deleteCard($cardId)
+    {
+        Card::findOrFail($cardId)->delete();
+        return response()->json(null, 204);
     }
 }

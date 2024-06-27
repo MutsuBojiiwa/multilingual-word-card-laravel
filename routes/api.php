@@ -41,6 +41,7 @@ Route::group(['prefix' => 'cards'], function () {
     // Route::get('getAll', [CardController::class, 'getAll']);
     Route::post('store', [CardController::class, 'store']);
     Route::get('{userId}', [CardController::class, 'getCardDetailsByDeckId']);
+    Route::delete('{cardId}', [CardController::class, 'deleteCard']);
 });
 
 
