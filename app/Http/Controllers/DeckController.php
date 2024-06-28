@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Deck;
 use App\Http\Requests\UpdateDeckRequest;
 
+use Illuminate\Http\Request;
+
+
 
 class DeckController extends Controller
 {
@@ -35,11 +38,15 @@ class DeckController extends Controller
     //     return response()->json($deck);
     // }
 
-    // public function store(Request $request)
-    // {
-    //     $deck = Deck::create($request->all());
-    //     return response()->json(['data' => $deck], 201);
-    // }
+    public function store(Request $request)
+    {
+        $deck = Deck::create([
+            'user_id' => $request->user_id,
+            'name' => '新しいデッキ'
+        ]);
+
+        return response()->json(['data' => $deck], 201);
+    }
 
     // public function show($id)
     // {
