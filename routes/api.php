@@ -36,6 +36,8 @@ Route::group(['prefix' => 'decks'], function () {
     Route::post('store', [DeckController::class, 'store']);
     Route::put('update/{id}', [DeckController::class, 'update']);
     Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
+    Route::delete('{deckId}', [DeckController::class, 'destroy']);
+
 });
 
 Route::group(['prefix' => 'cards'], function () {

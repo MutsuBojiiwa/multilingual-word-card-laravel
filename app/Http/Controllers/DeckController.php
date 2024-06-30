@@ -68,9 +68,9 @@ class DeckController extends Controller
         return response()->json($deck);
     }
 
-    // public function destroy($id)
-    // {
-    //     Deck::findOrFail($id)->delete();
-    //     return response()->json(null, 204);
-    // }
+    public function destroy($id)
+    {
+        Deck::findOrFail($id)->delete();
+        return response()->json(null, 204);
+    }
 }
