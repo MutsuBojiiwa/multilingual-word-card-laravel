@@ -32,11 +32,10 @@ class CardController extends Controller
 
 
         $formattedLocales = $locales->map(function ($locale) {
-            $localeNames = ['ja' => "日本語", "en" => "English", "fr" => "Français"];
             return [
                 'id' => $locale->id,
-                'key' => $locale->key,
-                'name' => $localeNames[$locale->key] ?? 'undefined'
+                'code' => $locale->code,
+                'name' => $locale->name,
             ];
         });
 
