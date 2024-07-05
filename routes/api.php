@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\LocaleController;
 
 
 /*
@@ -45,6 +46,10 @@ Route::group(['prefix' => 'cards'], function () {
     Route::post('store', [CardController::class, 'store']);
     Route::get('{userId}', [CardController::class, 'getCardDetailsByDeckId']);
     Route::delete('{cardId}', [CardController::class, 'deleteCard']);
+});
+
+Route::group(['prefix' => 'locales'], function () {
+    Route::get('getAll', [LocaleController::class, 'getAll']);
 });
 
 
