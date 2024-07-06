@@ -50,6 +50,7 @@ Route::group(['prefix' => 'cards'], function () {
 
 Route::group(['prefix' => 'locales'], function () {
     Route::get('getAll', [LocaleController::class, 'getAll']);
+    Route::get('getByIds', [LocaleController::class, 'getByIds']);
 });
 
 
