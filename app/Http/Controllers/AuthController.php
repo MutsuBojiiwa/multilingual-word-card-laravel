@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'logout']]);
     }
 
     public function login(Request $request)
@@ -73,7 +73,9 @@ class AuthController extends Controller
 
     public function logout()
     {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        if(JWTAuth::getToken()){
+            JWTAuth::invalidate(JWTAuth::getToken());
+        }
         return response()->json([
             'data' => [
                 'message' => 'ログアウトしました。',

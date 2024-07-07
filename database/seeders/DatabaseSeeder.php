@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\LocaleMaster;
 use Illuminate\Database\Seeder;
 
 use Database\Seeders\UserSeeder;
@@ -16,9 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-	// 追記
         $this->call([
+            // ここにSeederを追記するといっぺんに実行できる
             UserSeeder::class,
+            LocaleMasterSeeder::class,
+            DeckSeeder::class,
+            CardSeeder::class,
+            CardDetailSeeder::class,
         ]);
     }
 }
