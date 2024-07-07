@@ -9,6 +9,8 @@ use App\Models\Card;
 use App\Models\CardDetail;
 use App\Models\LocaleMaster;
 
+use App\Http\Requests\UpdateCardDetailRequest;
+
 class CardController extends Controller
 {
     public function __construct()
@@ -77,5 +79,21 @@ class CardController extends Controller
     {
         Card::findOrFail($cardId)->delete();
         return response()->json(null, 204);
+    }
+
+    public function updateCardDetail(UpdateCardDetailRequest $request, $cardDetailId)
+    {
+        Log::debug($request);
+        $validatedData = $request->validated();
+        Log::debug($validatedData);
+
+
+        $cardDetail = CardDetail::findOrFail($cardDetailId);
+        $cardDetail->card_id = $validatedData['card_id'];
+        $cardDetail->word = $validatedData['word'];
+        $cardDetail->locale_id = $validatedData['locale_id'];
+        $cardDetail->save();
+
+        return response()->json($cardDetail);
     }
 }
