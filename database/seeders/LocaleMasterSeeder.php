@@ -49,12 +49,15 @@ class LocaleMasterSeeder extends Seeder
         ];
 
         foreach ($locales as $locale) {
-            DB::table('locale_master')->insert([
-                'code' => $locale['code'],
-                'name' => $locale['name'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
+            DB::table('locale_master')->upsert(
+                [
+                    'code' => $locale['code'],
+                    'name' => $locale['name'],
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+                ['id']
+            );
         }
     }
 }

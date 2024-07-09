@@ -49,8 +49,7 @@ class CardDetailSeeder extends Seeder
             ['card_id' => 12, 'locale_id' => 2, 'word' => 'I am a student']
         ];
 
-        foreach ($cardDetails as $detail) {
-            CardDetail::create($detail);
-        }
+        // Use the upsert method
+        CardDetail::upsert($cardDetails, ['id']);
     }
 }
