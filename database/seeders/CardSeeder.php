@@ -16,10 +16,11 @@ class CardSeeder extends Seeder
     {
         $deckIds = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2];
 
-        foreach ($deckIds as $deckId) {
-            Card::create([
-                'deck_id' => $deckId
-            ]);
-        }
+        $cards = array_map(function($deckId) {
+            return ['deck_id' => $deckId];
+        }, $deckIds);
+
+        // Use the upsert method
+        Card::upsert($cards, ['id']);
     }
 }
