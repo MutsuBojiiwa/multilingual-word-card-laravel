@@ -18,13 +18,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            // ここにSeederを追記するといっぺんに実行できる
-            UserSeeder::class,
-            LocaleMasterSeeder::class,
-            DeckSeeder::class,
-            CardSeeder::class,
-            CardDetailSeeder::class,
-        ]);
+        if (app()->environment('testing')) {
+            //テストのときはシーダーを使わない
+        } else {
+            $this->call([
+                // ここにSeederを追記するといっぺんに実行できる
+                UserSeeder::class,
+                LocaleMasterSeeder::class,
+                DeckSeeder::class,
+                CardSeeder::class,
+                CardDetailSeeder::class,
+            ]);
+        }
     }
 }
