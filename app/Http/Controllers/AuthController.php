@@ -11,13 +11,12 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'logout']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     public function login(Request $request)
     {
         Log::info("ログインメソッドの中");
-        Log::info('$request=' . json_encode($request->all()));
 
         $request->validate([
             'email' => 'required|string|email',
@@ -83,14 +82,14 @@ class AuthController extends Controller
         ]);
     }
 
-    public function refresh()
-    {
-        return response()->json([
-            'user' => JWTAuth::user(),
-            'authorization' => [
-                'token' => JWTAuth::refresh(),
-                'type' => 'bearer',
-            ]
-        ]);
-    }
+    // public function refresh()
+    // {
+    //     return response()->json([
+    //         'user' => JWTAuth::user(),
+    //         'authorization' => [
+    //             'token' => JWTAuth::refresh(),
+    //             'type' => 'bearer',
+    //         ]
+    //     ]);
+    // }
 }
