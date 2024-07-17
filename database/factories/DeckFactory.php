@@ -12,7 +12,6 @@ class DeckFactory extends Factory
     public function definition()
     {
         return [
-            // 'user_id' => $this->user->id,
             'name' => $this->faker->word,
             'is_favorite' => $this->faker->boolean(),
             'is_public' => $this->faker->boolean(),
