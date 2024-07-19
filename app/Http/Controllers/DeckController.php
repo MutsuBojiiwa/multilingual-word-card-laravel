@@ -25,19 +25,6 @@ class DeckController extends Controller
         return response()->json(['data' => $decks], 200);
     }
 
-    // public function switchFavorite($id)
-    // {
-    //     // Deck を取得、存在しない場合は 404 エラーをスロー
-    //     $deck = Deck::findOrFail($id);
-
-    //     // is_favorite を切り替えて保存
-    //     $deck->is_favorite = !$deck->is_favorite;
-    //     $deck->save();
-
-    //     // 更新後の Deck を JSON 形式で返す
-    //     return response()->json($deck);
-    // }
-
     public function store(Request $request)
     {
         $deck = Deck::create([
@@ -47,12 +34,6 @@ class DeckController extends Controller
 
         return response()->json(['data' => $deck], 201);
     }
-
-    // public function show($id)
-    // {
-    //     $deck = Deck::findOrFail($id);
-    //     return response()->json(['data' => $deck], 200);
-    // }
 
     public function update(UpdateDeckRequest $request, $id)
     {
