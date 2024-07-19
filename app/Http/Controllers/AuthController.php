@@ -17,7 +17,6 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         Log::info("ログインメソッドの中");
-        Log::info('$request=' . json_encode($request->all()));
 
         $request->validate([
             'email' => 'required|string|email',
@@ -73,7 +72,9 @@ class AuthController extends Controller
 
     public function logout()
     {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        if(JWTAuth::getToken()){
+            JWTAuth::invalidate(JWTAuth::getToken());
+        }
         return response()->json([
             'data' => [
                 'message' => 'ログアウトしました。',
@@ -81,14 +82,14 @@ class AuthController extends Controller
         ]);
     }
 
-    public function refresh()
-    {
-        return response()->json([
-            'user' => JWTAuth::user(),
-            'authorization' => [
-                'token' => JWTAuth::refresh(),
-                'type' => 'bearer',
-            ]
-        ]);
-    }
+    // public function refresh()
+    // {
+    //     return response()->json([
+    //         'user' => JWTAuth::user(),
+    //         'authorization' => [
+    //             'token' => JWTAuth::refresh(),
+    //             'type' => 'bearer',
+    //         ]
+    //     ]);
+    // }
 }

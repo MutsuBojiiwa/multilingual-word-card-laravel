@@ -29,8 +29,10 @@ class DeckSeeder extends Seeder
             ],
         ];
 
-        foreach ($decks as $deck) {
-            Deck::create($deck);
-        }
+        // Define the unique key columns
+        $uniqueKeys = ['id'];
+
+        // Use the upsert method
+        Deck::upsert($decks, $uniqueKeys);
     }
 }

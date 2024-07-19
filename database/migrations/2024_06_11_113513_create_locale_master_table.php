@@ -15,7 +15,8 @@ class CreateLocaleMasterTable extends Migration
     {
         Schema::create('locale_master', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->unique();
+            $table->string('code', 2);
+            $table->string('name', 50);
             $table->timestamps();
         });
     }
