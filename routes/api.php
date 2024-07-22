@@ -38,7 +38,6 @@ Route::group(['prefix' => 'decks'], function () {
     Route::put('update/{id}', [DeckController::class, 'update']);
     Route::get('{userId}', [DeckController::class, 'getDecksByUserId']);
     Route::delete('{deckId}', [DeckController::class, 'destroy']);
-
 });
 
 Route::group(['prefix' => 'cards'], function () {
@@ -54,31 +53,3 @@ Route::group(['prefix' => 'locales'], function () {
     Route::get('getByIds', [LocaleController::class, 'getByIds']);
 });
 
-
-
-// Route::controller(DeckController::class)->group(function () {
-//     Route::get('/decks', 'index');
-//     Route::get('/decks/{userId}', 'getDecksByUserId');
-// });
-
-
-// Route::apiResource('decks', DeckController::class);
-
-
-// Route::middleware('auth:api')->get('users', function () {
-//     $users = User::all();
-//     return response()->json([
-//         'data' => $users
-//     ]);
-
-// });
-
-// Route::get('/check-jwt-secret', function () {
-//     return response()->json(['jwt_secret' => env('JWT_SECRET')]);
-// });
-
-// Route::get('/check-environment', function () {
-//     return response()->json([
-//         'environment' => $_ENV,
-//     ]);
-// });
