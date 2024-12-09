@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\ExamController;
 
 
 /*
@@ -51,5 +52,9 @@ Route::group(['prefix' => 'cards'], function () {
 Route::group(['prefix' => 'locales'], function () {
     Route::get('getAll', [LocaleController::class, 'getAll']);
     Route::get('getByIds', [LocaleController::class, 'getByIds']);
+});
+
+Route::group(['prefix' => 'exam'], function () {
+    Route::post('exam', [ExamController::class, 'getExamByDeckId']);
 });
 
